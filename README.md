@@ -19,13 +19,13 @@ Assicurarsi di aver installato [OpenSSH](https://en.wikipedia.org/wiki/OpenSSH) 
     cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
     chmod 0600 ~/.ssh/authorized_keys
     ```
-2. In caso fosse necessario, ripetere lo step precedente nel proprio host (`ls ~/.ssh/` per verificare l'esistenza della coppia di chiavi, ad es. `id_ed25519` e `id_ed25519.pub`).
+2. In caso fosse necessario, ripetere lo step precedente nel proprio host (`ls ~/.ssh/` per verificare l'esistenza della coppia di chiavi, ad es. `id_rsa` e `id_rsa.pub`).
 
 3. A questo punto bisogna rendere consapevole l'hpc che può dialogare in maniera sicura con il nostro host, aggiungendo la chiave pubblica dell'host al file `~/.ssh/authorized_keys` nella propria home sul cluster. È possibile farlo in automatico con il comando
     ```bash
     ssh-copy-id nome.cognome@login.hpc.unipr.it
     ```
-    In alternativa, basta copiare manualmente il contenuto di `~/.ssh/id_ed25519.pub` in fondo al file `~/.ssh/authorized_keys` sul cluster.
+    In alternativa, basta copiare manualmente il contenuto di `~/.ssh/id_rsa.pub` in fondo al file `~/.ssh/authorized_keys` sul cluster.
 
 ### `ssh-agent` (opzionale)
 
@@ -45,7 +45,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 EOF
 
 # aggiunge la chiave privata
-ssh-add ~/.ssh/id_ed25519
+ssh-add ~/.ssh/id_rsa
 ```
 
 In questo modo, una volta inserita la passphrase alla prima connessione, l'agente conserverà fino al prossimo riavvio del pc la chiave privata decrittata (salvo differenti specifiche).
